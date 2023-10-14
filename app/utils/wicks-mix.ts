@@ -182,10 +182,12 @@ export function combineLists(lists: string[]) {
     output += "\n"; // Add an empty line after each section
   });
 
-  output += "Recipes:\n"; // Add "Recipes:" followed by a newline to the output string
-  Object.entries(recipes).forEach(([name, count]) => {
-    output += `${count}x ${name}\n`; // Add the recipe line followed by a newline to the output string
-  });
+  if (Object.keys(recipes).length > 0) {
+    output += "Recipes:\n"; // Add "Recipes:" followed by a newline to the output string
+    Object.entries(recipes).forEach(([name, count]) => {
+      output += `${count}x ${name}\n`; // Add the recipe line followed by a newline to the output string
+    });
+  }
 
   return output; // Return the output string
 }

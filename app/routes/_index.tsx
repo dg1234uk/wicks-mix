@@ -5,6 +5,8 @@ import {
 } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { combineLists } from "../utils/wicks-mix";
+import { Textarea } from "~/components/ui/textarea";
+import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -58,52 +60,68 @@ function copyTextToClipboard(
   return event;
 }
 
+export function TypographyH1({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+      {children}
+    </h2>
+  );
+}
+export function TypographyH2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+      {children}
+    </h2>
+  );
+}
+
 export default function Index() {
   const data = useActionData<typeof action>();
 
   return (
-    <div>
-      <h1>Wicks Mix</h1>
+    <div className="m-8">
+      <TypographyH1>Wicks Mix</TypographyH1>
       <Form method="post">
-        <div>
-          <div>
-            <h2>List 1:</h2>
-            <div>
-              <label htmlFor="list1">List 1</label>
-              <textarea
-                name="list1"
-                id="list1"
-                rows={10}
-                placeholder="Shopping List 1"
-              />
-            </div>
+        <div className="flex gap-4 mt-8">
+          <div className="w-5/12">
+            <label htmlFor="list1">
+              <TypographyH2>List 1:</TypographyH2>
+            </label>
+            <Textarea
+              name="list1"
+              id="list1"
+              rows={10}
+              placeholder="Shopping List 1"
+            />
           </div>
-          <div>
-            <h2>List 2:</h2>
-            <div>
-              <label htmlFor="list2">List 2</label>
-              <textarea
-                name="list2"
-                id="list2"
-                rows={10}
-                placeholder="Shopping List 2"
-              />
-            </div>
+          <div className="w-5/12">
+            <label htmlFor="list2">
+              <TypographyH2>List 2:</TypographyH2>
+            </label>
+            <Textarea
+              name="list2"
+              id="list2"
+              rows={10}
+              placeholder="Shopping List 2"
+            />
           </div>
         </div>
-        <div>
-          <button type="submit">Submit</button>
+        <div className="mt-8">
+          <Button type="submit">Combine Lists</Button>
         </div>
       </Form>
-      <div>
-        <h2>Combined Shopping List:</h2>
+      <div className="mt-8">
+        <TypographyH2>Combined Shopping List</TypographyH2>
         {data?.output ? (
-          <pre>
-            <button
+          <pre className="relative bg-gray-300">
+            <Button
+              variant={"outline"}
+              size={"icon"}
+              className="absolute top-2 right-2"
               onClick={(event) => copyTextToClipboard(data.output, event)}
             >
               Copy
-            </button>
+            </Button>
             {data.output}
           </pre>
         ) : null}
