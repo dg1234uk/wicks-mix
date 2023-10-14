@@ -82,7 +82,7 @@ export default function Index() {
     <div className="m-8">
       <TypographyH1>Wicks Mix</TypographyH1>
       <Form method="post">
-        <div className="flex gap-4 mt-8">
+        <div className="flex flex-col md:flex-row gap-4 mt-8">
           <div className="w-5/12">
             <label htmlFor="list1">
               <TypographyH2>List 1:</TypographyH2>
