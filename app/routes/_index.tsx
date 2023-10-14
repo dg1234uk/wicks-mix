@@ -113,7 +113,7 @@ export default function Index() {
       <div className="mt-8">
         <TypographyH2>Combined Shopping List</TypographyH2>
         {data?.output ? (
-          <pre className="relative bg-gray-300">
+          <pre className="relative bg-gray-300 p-4 rounded-md">
             <Button
               variant={"outline"}
               size={"icon"}
