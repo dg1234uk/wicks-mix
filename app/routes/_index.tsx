@@ -79,12 +79,12 @@ export default function Index() {
   const data = useActionData<typeof action>();
 
   return (
-    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-2">
+    <div className="mx-auto mt-2 max-w-7xl px-2 sm:px-6 lg:px-8">
       <header className="text-center md:text-left">
         <TypographyH1>Wicks Mix</TypographyH1>
       </header>
       <Form method="post">
-        <div className="flex flex-col md:flex-row gap-4 mt-8">
+        <div className="mt-8 flex flex-col gap-4 md:flex-row">
           <div className="flex-1">
             <label htmlFor="list1">
               <TypographyH2>List 1:</TypographyH2>
@@ -118,11 +118,11 @@ export default function Index() {
       {data?.output ? (
         <div className="mt-8">
           <TypographyH2>Combined Shopping List</TypographyH2>
-          <pre className="relative bg-gray-300 p-4 rounded-md">
+          <pre className="relative rounded-md bg-gray-300 p-4">
             <Button
               variant={"outline"}
               size={"icon"}
-              className="absolute top-2 right-2"
+              className="absolute right-2 top-2"
               onClick={(event) => copyTextToClipboard(data.output, event)}
             >
               Copy
