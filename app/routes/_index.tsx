@@ -79,11 +79,13 @@ export default function Index() {
   const data = useActionData<typeof action>();
 
   return (
-    <div className="m-8">
-      <TypographyH1>Wicks Mix</TypographyH1>
-      <Form method="post">
-        <div className="flex flex-col md:flex-row gap-4 mt-8">
-          <div className="w-5/12">
+    <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8">
+      <header className="text-center md:text-left">
+        <TypographyH1>Wicks Mix</TypographyH1>
+      </header>
+      <Form method="post" action="/?index#result">
+        <div className="mt-4 flex flex-col gap-4 md:flex-row">
+          <div className="flex-1">
             <label htmlFor="list1">
               <TypographyH2>List 1:</TypographyH2>
             </label>
@@ -94,7 +96,7 @@ export default function Index() {
               placeholder="Shopping List 1"
             />
           </div>
-          <div className="w-5/12">
+          <div className="flex-1">
             <label htmlFor="list2">
               <TypographyH2>List 2:</TypographyH2>
             </label>
@@ -106,26 +108,29 @@ export default function Index() {
             />
           </div>
         </div>
-        <div className="mt-8">
-          <Button type="submit">Combine Lists</Button>
+        <div className="mt-8 flex justify-end">
+          <Button type="submit" className="w-full md:w-auto">
+            Combine Lists
+          </Button>
         </div>
       </Form>
-      <div className="mt-8">
-        <TypographyH2>Combined Shopping List</TypographyH2>
-        {data?.output ? (
-          <pre className="relative bg-gray-300 p-4 rounded-md">
+
+      {data?.output ? (
+        <div id="result" className="mt-8">
+          <TypographyH2>Combined Shopping List</TypographyH2>
+          <pre className="relative overflow-x-scroll rounded-md bg-gray-300 p-4">
             <Button
               variant={"outline"}
               size={"icon"}
-              className="absolute top-2 right-2"
+              className="absolute right-2 top-2"
               onClick={(event) => copyTextToClipboard(data.output, event)}
             >
               Copy
             </Button>
             {data.output}
           </pre>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }
