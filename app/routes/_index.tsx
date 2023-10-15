@@ -79,12 +79,12 @@ export default function Index() {
   const data = useActionData<typeof action>();
 
   return (
-    <div className="mx-auto mt-2 max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8">
       <header className="text-center md:text-left">
         <TypographyH1>Wicks Mix</TypographyH1>
       </header>
-      <Form method="post">
-        <div className="mt-8 flex flex-col gap-4 md:flex-row">
+      <Form method="post" action="/?index#result">
+        <div className="mt-4 flex flex-col gap-4 md:flex-row">
           <div className="flex-1">
             <label htmlFor="list1">
               <TypographyH2>List 1:</TypographyH2>
@@ -116,9 +116,9 @@ export default function Index() {
       </Form>
 
       {data?.output ? (
-        <div className="mt-8">
+        <div id="result" className="mt-8">
           <TypographyH2>Combined Shopping List</TypographyH2>
-          <pre className="relative rounded-md bg-gray-300 p-4">
+          <pre className="relative overflow-x-scroll rounded-md bg-gray-300 p-4">
             <Button
               variant={"outline"}
               size={"icon"}
