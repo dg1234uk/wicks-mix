@@ -79,11 +79,13 @@ export default function Index() {
   const data = useActionData<typeof action>();
 
   return (
-    <div className="m-8">
-      <TypographyH1>Wicks Mix</TypographyH1>
+    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mt-2">
+      <header className="text-center md:text-left">
+        <TypographyH1>Wicks Mix</TypographyH1>
+      </header>
       <Form method="post">
         <div className="flex flex-col md:flex-row gap-4 mt-8">
-          <div className="w-5/12">
+          <div className="flex-1">
             <label htmlFor="list1">
               <TypographyH2>List 1:</TypographyH2>
             </label>
@@ -94,7 +96,7 @@ export default function Index() {
               placeholder="Shopping List 1"
             />
           </div>
-          <div className="w-5/12">
+          <div className="flex-1">
             <label htmlFor="list2">
               <TypographyH2>List 2:</TypographyH2>
             </label>
@@ -106,13 +108,16 @@ export default function Index() {
             />
           </div>
         </div>
-        <div className="mt-8">
-          <Button type="submit">Combine Lists</Button>
+        <div className="mt-8 flex justify-end">
+          <Button type="submit" className="w-full md:w-auto">
+            Combine Lists
+          </Button>
         </div>
       </Form>
-      <div className="mt-8">
-        <TypographyH2>Combined Shopping List</TypographyH2>
-        {data?.output ? (
+
+      {data?.output ? (
+        <div className="mt-8">
+          <TypographyH2>Combined Shopping List</TypographyH2>
           <pre className="relative bg-gray-300 p-4 rounded-md">
             <Button
               variant={"outline"}
@@ -124,8 +129,8 @@ export default function Index() {
             </Button>
             {data.output}
           </pre>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }
