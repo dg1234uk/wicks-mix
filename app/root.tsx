@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,6 +8,16 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Wicks Mix" },
+    {
+      name: "description",
+      content: `A tool to combine two shopping lists from Joe Wick's Bodycoach app.`,
+    },
+  ];
+};
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
