@@ -24,16 +24,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const list1 = String(form.get("list1"));
   const list2 = String(form.get("list2"));
 
-  if (list1 === null || list2 === null) {
-    return json(
-      {
-        output: null,
-        fieldErrors: null,
-        fields: null,
-        formError: "Requires a list",
-      },
-      { status: 400 },
-    );
+  if (typeof list1 !== "string" || typeof list2 !== "string") {
+    return new Response("Invalid form types", { status: 400 });
   }
 
   const output = combineLists([list1, list2]);
@@ -90,8 +82,8 @@ export default function Index() {
               <TypographyH2>List 1:</TypographyH2>
             </label>
             <Textarea
-              name="list1"
               id="list1"
+              name="list1"
               rows={10}
               placeholder="Shopping List 1"
             />
@@ -101,8 +93,8 @@ export default function Index() {
               <TypographyH2>List 2:</TypographyH2>
             </label>
             <Textarea
-              name="list2"
               id="list2"
+              name="list2"
               rows={10}
               placeholder="Shopping List 2"
             />
