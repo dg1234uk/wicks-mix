@@ -3,7 +3,12 @@ import {
   type ActionFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import {
+  Form,
+  useActionData,
+  useFormAction,
+  useNavigation,
+} from "@remix-run/react";
 import { combineLists } from "../utils/wicks-mix";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
@@ -69,6 +74,12 @@ export function TypographyH2({ children }: { children: React.ReactNode }) {
 
 export default function Index() {
   const data = useActionData<typeof action>();
+  const navigation = useNavigation();
+  const formAction = useFormAction();
+  const isSubmitting =
+    navigation.state !== "idle" &&
+    navigation.formMethod === "POST" &&
+    navigation.formAction === formAction;
 
   return (
     <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -101,8 +112,12 @@ export default function Index() {
           </div>
         </div>
         <div className="mt-8 flex justify-end">
-          <Button type="submit" className="w-full md:w-auto">
-            Combine Lists
+          <Button
+            type="submit"
+            className="w-full md:w-auto"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? `Combinging...` : `Combine Lists`}
           </Button>
         </div>
       </Form>
