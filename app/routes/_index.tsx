@@ -35,6 +35,12 @@ type ActionErrors = {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
+  const honeypot = String(form.get("name"));
+
+  if (honeypot) {
+    return new Response("Invalid form", { status: 400 });
+  }
+
   const list1 = String(form.get("list1"));
   const list2 = String(form.get("list2"));
 
@@ -183,6 +189,10 @@ export default function Index() {
         ref={formRef}
         tabIndex={-1}
       >
+        <div style={{ display: "none" }} aria-hidden>
+          <label htmlFor="name-input">Please leave this field blank</label>
+          <input id="name-input" name="name" type="text" />
+        </div>
         <div className="mt-4 flex flex-col gap-4 md:flex-row">
           <div className="flex-1">
             <label htmlFor="list1">
