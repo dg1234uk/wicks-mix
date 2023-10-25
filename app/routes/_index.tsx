@@ -3,12 +3,7 @@ import {
   type ActionFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import {
-  Form,
-  useActionData,
-  useFormAction,
-  useNavigation,
-} from "@remix-run/react";
+import { useFetcher, useFormAction, useNavigation } from "@remix-run/react";
 import { combineLists } from "../utils/wicks-mix";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
@@ -59,15 +54,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (list1 === "") {
     errors.fieldErrors.list1.push("List 1 is required");
   }
-  // if (title.length > titleMaxLength) {
-  //   errors.fieldErrors.title.push("Title must be at most 100 characters");
-  // }
   if (list2 === "") {
     errors.fieldErrors.list2.push("List 2 is required");
   }
-  // if (content.length > contentMaxLength) {
-  //   errors.fieldErrors.content.push("Content must be at most 10000 characters");
-  // }
 
   const hasErrors =
     errors.formErrors.length ||
@@ -140,7 +129,8 @@ function useHydrated() {
 }
 
 export default function Index() {
-  const data = useActionData<typeof action>();
+  const fetcher = useFetcher<typeof action>();
+  const data = fetcher.data;
   const formRef = useRef<HTMLFormElement>(null);
   const navigation = useNavigation();
   const formAction = useFormAction();
@@ -180,7 +170,7 @@ export default function Index() {
       <header className="text-center md:text-left">
         <TypographyH1>Wicks Mix</TypographyH1>
       </header>
-      <Form
+      <fetcher.Form
         method="post"
         action="/?index#result"
         noValidate={isHydrated}
@@ -240,7 +230,7 @@ export default function Index() {
           </Button>
         </div>
         <ErrorList id={formErrorId} errors={formErrors} />
-      </Form>
+      </fetcher.Form>
 
       {data?.output ? (
         <div id="result" className="mt-8">
