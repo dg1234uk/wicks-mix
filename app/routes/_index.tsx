@@ -225,9 +225,9 @@ export default function Index() {
               aria-invalid={list2HasErrors || undefined}
               aria-describedby={list2ErrorId}
             />
-          </div>
-          <div>
-            <ErrorList id={list2ErrorId} errors={fieldErrors?.list2} />
+            <div>
+              <ErrorList id={list2ErrorId} errors={fieldErrors?.list2} />
+            </div>
           </div>
         </div>
         <div className="mt-8 flex justify-end">
