@@ -3,7 +3,7 @@ import {
   type ActionFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import { useFetcher, useFormAction, useNavigation } from "@remix-run/react";
+import { useFetcher, useFormAction } from "@remix-run/react";
 import { combineLists } from "../utils/wicks-mix";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
@@ -132,12 +132,11 @@ export default function Index() {
   const fetcher = useFetcher<typeof action>();
   const data = fetcher.data;
   const formRef = useRef<HTMLFormElement>(null);
-  const navigation = useNavigation();
   const formAction = useFormAction();
   const isSubmitting =
-    navigation.state !== "idle" &&
-    navigation.formMethod === "POST" &&
-    navigation.formAction === formAction;
+    fetcher.state !== "idle" &&
+    fetcher.formMethod === "POST" &&
+    fetcher.formAction === formAction;
 
   const fieldErrors = data?.status === "error" ? data.errors.fieldErrors : null;
   const formErrors = data?.status === "error" ? data.errors.formErrors : null;
